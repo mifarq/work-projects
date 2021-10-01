@@ -10,7 +10,7 @@ library(ggthemr)
 
 ggthemr("pale")
 
-# Load URL using API. See API documentation to see what I did https://fiscaldata.treasury.gov/api-documentation/
+# Load URL using API. 
 
 url_api <- "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/dts/dts_table_1?format=csv&fields=record_date,account_type,close_today_bal,record_calendar_year&filter=record_calendar_year:in:(2020,2021)&page[number]=1&page[size]=6000"
 dts <- read_csv(getURL(url_api))
@@ -18,36 +18,16 @@ dts <- read_csv(getURL(url_api))
 # Filter for just Fed in Account Type
 dts <- dts %>% filter(account_type == "Federal Reserve Account")
 
-## Setting Plotly API and UN
+## Setting Plotly API and UN (UN and PW hidden for security reasons)
 
-Sys.setenv("plotly_username"="mfarq")
-Sys.setenv("plotly_api_key"="qrD6m7CM5ulEVYI8uIvn")
+Sys.setenv("plotly_username"="xxxxx")
+Sys.setenv("plotly_api_key"="xxxxxxxxxxxxxxxxx")
 
 ## Changing Column Names
 
 colnames(dts)
 names(dts)[names(dts) == "record_date"] <- "Date"
 names(dts)[names(dts) == "close_today_bal"] <- "Closing Balance"
-
-## Reading data
-
-#dts <- read.csv("dts.csv", header = T)
-#dts
-
-## Checking Date labeled incorrectly as "chr"
-
-#str(dts)
-
-## Converting date from "chr" to date
-
-#dts$Record.Date <- as.Date(dts$Record.Date, format = "%m/%d/%y")
-#str(dts)
-
-## Alternative Time Series Series Plot using autolplot
-
-#dtst <- ts(dts$Closing.Balance.Today, start=c(2020,1), freq=365)
-#dtst
-#autoplot(dtst)
 
 ## Creating GGPlot 
 
