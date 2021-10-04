@@ -15,8 +15,9 @@ ggthemr("pale")
 url_api <- "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/dts/dts_table_1?format=csv&fields=record_date,account_type,close_today_bal,record_calendar_year&filter=record_calendar_year:in:(2020,2021)&page[number]=1&page[size]=6000"
 dts <- read_csv(getURL(url_api))
 
-# Filter for just Fed in Account Type
-dts <- dts %>% filter(account_type == "Federal Reserve Account")
+# Filter for just Federal Reserve Account (renamed TGA starting in FY 2022) in Account Type
+target <- c("Federal Reserve Account", "Treasury General Account (TGA)")
+dts <- dts %>% filter(account_type %in% target)
 
 ## Setting Plotly API and UN
 
