@@ -70,5 +70,6 @@ ggplot(df1, aes(x = date, y=value, fill=variable)) +
   theme_ipsum() + 
   xlab("Time") +
   theme(legend.title=element_blank()) +
+  scale_y_continuous(labels = scales::comma) +
   ylab("Employees, in thousands (Seasonally Adjusted)") +
   ggtitle("Employees on nonfarm payrolls by industry sector")
